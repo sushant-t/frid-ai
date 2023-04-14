@@ -1,0 +1,617 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		70228DE829E8E91400093647 /* FridAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70228DE729E8E91400093647 /* FridAIApp.swift */; };
+		70228DEA29E8E91400093647 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70228DE929E8E91400093647 /* ContentView.swift */; };
+		70228DEC29E8E91500093647 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70228DEB29E8E91500093647 /* Assets.xcassets */; };
+		70228DF029E8E91500093647 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70228DEF29E8E91500093647 /* Preview Assets.xcassets */; };
+		70228DFA29E8E91500093647 /* frid_aiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70228DF929E8E91500093647 /* frid_aiTests.swift */; };
+		70228E0429E8E91500093647 /* frid_aiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70228E0329E8E91500093647 /* frid_aiUITests.swift */; };
+		70228E0629E8E91500093647 /* frid_aiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70228E0529E8E91500093647 /* frid_aiUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		70228DF629E8E91500093647 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 70228DDC29E8E91400093647 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 70228DE329E8E91400093647;
+			remoteInfo = "frid-ai";
+		};
+		70228E0029E8E91500093647 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 70228DDC29E8E91400093647 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 70228DE329E8E91400093647;
+			remoteInfo = "frid-ai";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		70228DE429E8E91400093647 /* FridAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FridAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		70228DE729E8E91400093647 /* FridAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridAIApp.swift; sourceTree = "<group>"; };
+		70228DE929E8E91400093647 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		70228DEB29E8E91500093647 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		70228DED29E8E91500093647 /* frid_ai.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = frid_ai.entitlements; sourceTree = "<group>"; };
+		70228DEF29E8E91500093647 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		70228DF529E8E91500093647 /* FridAITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FridAITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		70228DF929E8E91500093647 /* frid_aiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = frid_aiTests.swift; sourceTree = "<group>"; };
+		70228DFF29E8E91500093647 /* FridAIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FridAIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		70228E0329E8E91500093647 /* frid_aiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = frid_aiUITests.swift; sourceTree = "<group>"; };
+		70228E0529E8E91500093647 /* frid_aiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = frid_aiUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		70228DE129E8E91400093647 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70228DF229E8E91500093647 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70228DFC29E8E91500093647 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		70228DDB29E8E91400093647 = {
+			isa = PBXGroup;
+			children = (
+				70228DE629E8E91400093647 /* FridAI */,
+				70228DF829E8E91500093647 /* FridAITests */,
+				70228E0229E8E91500093647 /* FridAIUITests */,
+				70228DE529E8E91400093647 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		70228DE529E8E91400093647 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				70228DE429E8E91400093647 /* FridAI.app */,
+				70228DF529E8E91500093647 /* FridAITests.xctest */,
+				70228DFF29E8E91500093647 /* FridAIUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		70228DE629E8E91400093647 /* FridAI */ = {
+			isa = PBXGroup;
+			children = (
+				70228DE729E8E91400093647 /* FridAIApp.swift */,
+				70228DE929E8E91400093647 /* ContentView.swift */,
+				70228DEB29E8E91500093647 /* Assets.xcassets */,
+				70228DED29E8E91500093647 /* frid_ai.entitlements */,
+				70228DEE29E8E91500093647 /* Preview Content */,
+			);
+			path = FridAI;
+			sourceTree = "<group>";
+		};
+		70228DEE29E8E91500093647 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				70228DEF29E8E91500093647 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		70228DF829E8E91500093647 /* FridAITests */ = {
+			isa = PBXGroup;
+			children = (
+				70228DF929E8E91500093647 /* frid_aiTests.swift */,
+			);
+			path = FridAITests;
+			sourceTree = "<group>";
+		};
+		70228E0229E8E91500093647 /* FridAIUITests */ = {
+			isa = PBXGroup;
+			children = (
+				70228E0329E8E91500093647 /* frid_aiUITests.swift */,
+				70228E0529E8E91500093647 /* frid_aiUITestsLaunchTests.swift */,
+			);
+			path = FridAIUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		70228DE329E8E91400093647 /* FridAI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70228E0929E8E91500093647 /* Build configuration list for PBXNativeTarget "FridAI" */;
+			buildPhases = (
+				70228DE029E8E91400093647 /* Sources */,
+				70228DE129E8E91400093647 /* Frameworks */,
+				70228DE229E8E91400093647 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FridAI;
+			productName = "frid-ai";
+			productReference = 70228DE429E8E91400093647 /* FridAI.app */;
+			productType = "com.apple.product-type.application";
+		};
+		70228DF429E8E91500093647 /* FridAITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70228E0C29E8E91500093647 /* Build configuration list for PBXNativeTarget "FridAITests" */;
+			buildPhases = (
+				70228DF129E8E91500093647 /* Sources */,
+				70228DF229E8E91500093647 /* Frameworks */,
+				70228DF329E8E91500093647 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				70228DF729E8E91500093647 /* PBXTargetDependency */,
+			);
+			name = FridAITests;
+			productName = "frid-aiTests";
+			productReference = 70228DF529E8E91500093647 /* FridAITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		70228DFE29E8E91500093647 /* FridAIUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70228E0F29E8E91500093647 /* Build configuration list for PBXNativeTarget "FridAIUITests" */;
+			buildPhases = (
+				70228DFB29E8E91500093647 /* Sources */,
+				70228DFC29E8E91500093647 /* Frameworks */,
+				70228DFD29E8E91500093647 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				70228E0129E8E91500093647 /* PBXTargetDependency */,
+			);
+			name = FridAIUITests;
+			productName = "frid-aiUITests";
+			productReference = 70228DFF29E8E91500093647 /* FridAIUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		70228DDC29E8E91400093647 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					70228DE329E8E91400093647 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					70228DF429E8E91500093647 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 70228DE329E8E91400093647;
+					};
+					70228DFE29E8E91500093647 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 70228DE329E8E91400093647;
+					};
+				};
+			};
+			buildConfigurationList = 70228DDF29E8E91400093647 /* Build configuration list for PBXProject "FridAI" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 70228DDB29E8E91400093647;
+			productRefGroup = 70228DE529E8E91400093647 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				70228DE329E8E91400093647 /* FridAI */,
+				70228DF429E8E91500093647 /* FridAITests */,
+				70228DFE29E8E91500093647 /* FridAIUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		70228DE229E8E91400093647 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70228DF029E8E91500093647 /* Preview Assets.xcassets in Resources */,
+				70228DEC29E8E91500093647 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70228DF329E8E91500093647 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70228DFD29E8E91500093647 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		70228DE029E8E91400093647 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70228DEA29E8E91400093647 /* ContentView.swift in Sources */,
+				70228DE829E8E91400093647 /* FridAIApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70228DF129E8E91500093647 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70228DFA29E8E91500093647 /* frid_aiTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70228DFB29E8E91500093647 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70228E0429E8E91500093647 /* frid_aiUITests.swift in Sources */,
+				70228E0629E8E91500093647 /* frid_aiUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		70228DF729E8E91500093647 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 70228DE329E8E91400093647 /* FridAI */;
+			targetProxy = 70228DF629E8E91500093647 /* PBXContainerItemProxy */;
+		};
+		70228E0129E8E91500093647 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 70228DE329E8E91400093647 /* FridAI */;
+			targetProxy = 70228E0029E8E91500093647 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		70228E0729E8E91500093647 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		70228E0829E8E91500093647 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		70228E0A29E8E91500093647 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "frid-ai/frid_ai.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"frid-ai/Preview Content\"";
+				DEVELOPMENT_TEAM = 73SXPF4AM7;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sushantt.FridAI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		70228E0B29E8E91500093647 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "frid-ai/frid_ai.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"frid-ai/Preview Content\"";
+				DEVELOPMENT_TEAM = 73SXPF4AM7;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sushantt.FridAI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		70228E0D29E8E91500093647 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 73SXPF4AM7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sushantt.frid-aiTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FridAI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FridAI";
+			};
+			name = Debug;
+		};
+		70228E0E29E8E91500093647 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 73SXPF4AM7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sushantt.frid-aiTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FridAI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FridAI";
+			};
+			name = Release;
+		};
+		70228E1029E8E91500093647 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 73SXPF4AM7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sushantt.frid-aiUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "frid-ai";
+			};
+			name = Debug;
+		};
+		70228E1129E8E91500093647 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 73SXPF4AM7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sushantt.frid-aiUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "frid-ai";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		70228DDF29E8E91400093647 /* Build configuration list for PBXProject "FridAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70228E0729E8E91500093647 /* Debug */,
+				70228E0829E8E91500093647 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		70228E0929E8E91500093647 /* Build configuration list for PBXNativeTarget "FridAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70228E0A29E8E91500093647 /* Debug */,
+				70228E0B29E8E91500093647 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		70228E0C29E8E91500093647 /* Build configuration list for PBXNativeTarget "FridAITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70228E0D29E8E91500093647 /* Debug */,
+				70228E0E29E8E91500093647 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		70228E0F29E8E91500093647 /* Build configuration list for PBXNativeTarget "FridAIUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70228E1029E8E91500093647 /* Debug */,
+				70228E1129E8E91500093647 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 70228DDC29E8E91400093647 /* Project object */;
+}
