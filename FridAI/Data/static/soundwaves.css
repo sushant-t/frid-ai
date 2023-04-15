@@ -1,8 +1,12 @@
 html, body {
     height: 100%;
+    overflow:hidden;
 }
 body {
     background: transparent;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .preload * {
@@ -10,14 +14,30 @@ body {
 }
 
 .loader {
+    background:transparent;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 30vh;
+    width:70vh;
     margin: auto 5vh;
     align-self:center;
     opacity: 0;
     overflow: hidden;
+}
+
+@media screen and (min-height: 480px) {
+    .loader {
+        height: 30vh;
+        width:70vh;
+    }
+}
+
+@media screen and (max-height: 480px) {
+    .loader {
+        height: 30vh;
+        width:70vh;
+    }
 }
 
 .active {

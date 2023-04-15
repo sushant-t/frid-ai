@@ -32,9 +32,9 @@ struct GrowingButton: ButtonStyle {
 
         init() {
             webView = WKWebView(frame: .zero)
-            webView.isOpaque = false
-            webView.backgroundColor = UIColor.clear
-            webView.scrollView.backgroundColor = UIColor.clear
+            webView.enclosingScrollView?.hasVerticalScroller = false
+            webView.enclosingScrollView?.verticalLineScroll = 0.0
+            webView.setValue(false, forKey: "drawsBackground")
             guard let htmlUrl = Bundle.main.url(forResource: "soundwaves", withExtension: "html", subdirectory: "Data/static") else {
                 print("could not read soundwave html file")
                 return
@@ -71,6 +71,27 @@ struct GrowingButton: ButtonStyle {
         }
 
         func updateNSView(_: WKWebView, context _: Context) {}
+        
+        func doAnimation() {
+            webView.evaluateJavaScript("""
+                                       if (document.querySelector('.loader').classList.contains('active')) {
+                                             document.querySelectorAll('.line').forEach(el => {el.classList.remove('stroke'); el.classList.add('small')})
+                                           setTimeout(()=>{
+                                       var el = document.querySelector('.loader').classList
+                                       el.remove('active')
+                                       el.add('inactive')
+                                       },500)
+                                            } else {
+                                             document.querySelectorAll('.line').forEach(el => {el.classList.remove('small'); el.classList.add('stroke')})
+                                             var el = document.querySelector('.loader').classList
+                                            el.remove('inactive')
+                                            el.add('active')
+                                            }
+                                       """) { (result, error) in
+                if error == nil {
+                }
+            }
+        }
     }
 
 #elseif os(iOS)
@@ -80,6 +101,7 @@ struct GrowingButton: ButtonStyle {
 
         init() {
             webView = WKWebView(frame: .zero)
+            webView.scrollView.isScrollEnabled = false
             webView.isOpaque = false
             webView.backgroundColor = UIColor.clear
             webView.scrollView.backgroundColor = UIColor.clear
@@ -137,7 +159,6 @@ struct GrowingButton: ButtonStyle {
                                             }
                                        """) { (result, error) in
                 if error == nil {
-                    print(result)
                 }
             }
         }
@@ -152,20 +173,27 @@ struct ContentView: View {
     var display: UIDisplay = UIDisplay()
     #endif
     var body: some View {
-        GeometryReader { _ in
+        #if os(macOS)
+        let mainScreen = NSScreen.main
+        let mainScreenVisibleFrame = mainScreen?.visibleFrame
+        let minDim = min(mainScreenVisibleFrame!.height, mainScreenVisibleFrame!.width)
+        #elseif os(iOS)
+        let mainScreen = UIScreen.main
+        let mainScreenVisibleFrame = mainScreen.bounds
+        let minDim = min(mainScreenVisibleFrame.height, mainScreenVisibleFrame.width)
+        #endif
+        GeometryReader { geo in
+            HStack {Spacer().frame(width:0.1*geo.size.width)
+                display
+                Spacer().frame(width:0.1*geo.size.width)
+            }.frame(width: nil, height:0.6*geo.size.height)
+                .position(x:0.5*geo.size.width,y:0.5*geo.size.height)
             VStack {
                 ScrollView {
                     Text(verbatim: whisperState.messageLog)
                         .foregroundColor(Color.white)
 
                 }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                HStack {
-                    Spacer().frame(width: 30)
-                    display.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                            .transition(.opacity)
-                    Spacer().frame(width: 30)
-                }
-
                 Button(action: {
                     display.doAnimation()
                     Task {
@@ -174,14 +202,17 @@ struct ContentView: View {
                 }) {
                     Text(!whisperState.isRecording ? whisperState.canTranscribe ? "RECORD" : "TRANSCRIBING" : "STOP"
                     ).animation(.easeIn(duration: 0.1))
+                        .padding(.vertical, geo.size.height*0.01)
+                        .frame(maxWidth: .infinity, alignment: .bottom)
+                        .contentShape(Rectangle())
                 }
                 .buttonStyle(GrowingButton())
                 .disabled(!whisperState.canTranscribe)
-                Spacer().frame(height: 10)
+                Spacer().frame(height: 20)
             }
             .padding(.horizontal, 30)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-        }.background(Color.blue)
+        }.background(RadialGradient(gradient: Gradient(colors: [.blue.opacity(0.8), .black]), center: .center, startRadius: 2, endRadius: 900)).frame(minWidth:0.3*minDim, minHeight: 0.4*minDim)
     }
 }
 
