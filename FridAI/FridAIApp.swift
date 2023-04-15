@@ -1,6 +1,6 @@
 //
-//  frid_aiApp.swift
-//  frid-ai
+//  fridAIApp.swift
+//  FridAI
 //
 //  Created by Sushant Thyagaraj on 4/13/23.
 //
