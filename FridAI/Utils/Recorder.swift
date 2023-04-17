@@ -10,11 +10,11 @@ import Foundation
 
 actor Recorder {
     private var recorder: AVAudioRecorder?
-    
+
     enum RecorderError: Error {
         case couldNotStartRecording
     }
-    
+
     func startRecording(toOutputFile url: URL, delegate: AVAudioRecorderDelegate?) throws {
         let recordSettings: [String: Any] = [
             AVFormatIDKey: Int(kAudioFormatLinearPCM),
@@ -22,10 +22,10 @@ actor Recorder {
             AVNumberOfChannelsKey: 1,
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue,
         ]
-#if !os(macOS)
-        let recordingSession = AVAudioSession.sharedInstance()
-        try recordingSession.setCategory(.playAndRecord, mode: .default)
-#endif
+        #if !os(macOS)
+            let recordingSession = AVAudioSession.sharedInstance()
+            try recordingSession.setCategory(.playAndRecord, mode: .default)
+        #endif
         let recorder = try AVAudioRecorder(url: url, settings: recordSettings)
         recorder.delegate = delegate
         recorder.prepareToRecord()
@@ -34,7 +34,7 @@ actor Recorder {
         }
         self.recorder = recorder
     }
-    
+
     func stopRecording() {
         recorder?.stop()
         recorder = nil

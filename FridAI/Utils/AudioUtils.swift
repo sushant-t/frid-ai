@@ -22,14 +22,12 @@ func decodeWavFile(_ url: URL) throws -> [Float] {
 func decodeWavFile2(_ url: URL) throws -> [Float] {
     let file = try! AVAudioFile(forReading: url)
     let format = AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: file.fileFormat.sampleRate, channels: 1, interleaved: false)
-    
+
     guard let format else {
         return [Float]()
     }
     let buf = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: 1024)!
-    try! file.read(into:buf)
-    let floats = Array(UnsafeBufferPointer(start: buf.floatChannelData?[0], count:Int(buf.frameLength)))
+    try! file.read(into: buf)
+    let floats = Array(UnsafeBufferPointer(start: buf.floatChannelData?[0], count: Int(buf.frameLength)))
     return floats
-    
-    
 }

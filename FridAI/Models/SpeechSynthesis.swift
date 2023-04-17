@@ -12,8 +12,7 @@ class SpeechSynthesis: NSObject {
     private var synthesizer: AVSpeechSynthesizer = .init()
 
     func dictate(text: String, locale: String = "en-US", rate: Float = AVSpeechUtteranceDefaultSpeechRate) {
-        
-        let audioSession = AVAudioSession.sharedInstance();
+        let audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
         } catch {
