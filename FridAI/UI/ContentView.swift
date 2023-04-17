@@ -189,7 +189,7 @@ struct ContentView: View {
                 .position(x: 0.5 * geo.size.width, y: 0.5 * geo.size.height)
             VStack {
                 ScrollView {
-                    Text(verbatim: agent.lastResponse)
+                    Text(verbatim: agent.currentResponse)
                         .foregroundColor(Color.white)
 
                 }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -202,7 +202,7 @@ struct ContentView: View {
                         }
                     } else if agent.status == .listening {
                         Task {
-                            await agent.generateResponse()
+                            await agent.generateResponse(stream: true)
                             agent.updateStatus(status: .ready)
                         }
                     }
