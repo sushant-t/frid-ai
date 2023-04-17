@@ -91,3 +91,5 @@ iOSInjectionProject/
 
 Data/models/*
 Data/samples/*
+
+Config.xcconfig

@@ -10,11 +10,10 @@ import Foundation
 import SwiftUI
 
 @MainActor
-class WhisperState: NSObject, ObservableObject, AVAudioRecorderDelegate {
-    @Published var isModelLoaded = false
-    @Published var messageLog = ""
-    @Published var canTranscribe = false
-    @Published var isRecording = false
+class WhisperState: NSObject, AVAudioRecorderDelegate {
+    var isModelLoaded = false
+    var canTranscribe = false
+    var isRecording = false
 
     private var whisperContext: WhisperContext?
     private var recordedFile: URL? = nil
@@ -31,26 +30,29 @@ class WhisperState: NSObject, ObservableObject, AVAudioRecorderDelegate {
 
     override init() {
         super.init()
+    }
+
+    public func prepare() {
         do {
             try loadModel()
             canTranscribe = true
         } catch {
             print(error.localizedDescription)
-            messageLog += "\(error.localizedDescription)\n"
+            Logger.shared.addLog(msg: "\(error.localizedDescription)\n")
         }
     }
 
     private func loadModel() throws {
-        messageLog += "Loading model...\n"
+        Logger.shared.addLog(msg: "Loading model...\n")
         if let modelUrl {
             if #available(macOS 13.0, *) {
                 whisperContext = try WhisperContext.createContext(path: modelUrl.path())
             } else {
                 whisperContext = try WhisperContext.createContext(path: modelUrl.path)
             }
-            messageLog += "Model loaded \(modelUrl.lastPathComponent)\n"
+            Logger.shared.addLog(msg: "Model loaded \(modelUrl.lastPathComponent)\n")
         } else {
-            messageLog += "Model not found\n"
+            Logger.shared.addLog(msg: "Model not found\n")
         }
     }
 
@@ -58,68 +60,72 @@ class WhisperState: NSObject, ObservableObject, AVAudioRecorderDelegate {
         if let sampleUrl {
             await transcribeAudio(sampleUrl)
         } else {
-            messageLog += "Sample not found\n"
+            Logger.shared.addLog(msg: "Sample not found\n")
         }
     }
 
-    private func transcribeAudio(_ url: URL) async {
+    private func transcribeAudio(_ url: URL) async -> String {
         if !canTranscribe {
-            return
+            return ""
         }
 
         guard let whisperContext else {
-            return
+            return ""
         }
 
+        var text = ""
         do {
             canTranscribe = false
-            messageLog += "Reading wave samples\n"
+            Logger.shared.addLog(msg: "Reading wave samples\n")
             let data = try readAudioSamples(url)
-            messageLog += "Transcribing...\n"
+            Logger.shared.addLog(msg: "Transcribing...\n")
             await whisperContext.fullTranscribe(samples: data)
-            let text = await whisperContext.getTranscription()
-            messageLog += "Done: \(text)\n"
+            text = await whisperContext.getTranscription()
+            Logger.shared.addLog(msg: "Done: \(text)\n")
         } catch {
             print(error.localizedDescription)
-            messageLog += "\(error.localizedDescription)\n"
+            Logger.shared.addLog(msg: "\(error.localizedDescription)\n")
         }
         canTranscribe = true
+        return text
     }
 
     private func readAudioSamples(_ url: URL) throws -> [Float] {
         stopPlayback()
-        try startPlayback(url)
+//        try startPlayback(url)
         return try decodeWavFile(url)
     }
 
-    func toggleRecord() async {
-        if isRecording {
-            await recorder.stopRecording()
-            isRecording = false
-            if let recordedFile {
-                await transcribeAudio(recordedFile)
-            }
-        } else {
-            requestRecordPermission { granted in
-                if granted {
-                    Task {
-                        do {
-                            self.stopPlayback()
-                            let file: URL
-                            if #available(macOS 13.0, *) {
-                                file = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appending(path: "output.wav")
-                            } else {
-                                // Fallback on earlier versions
-                                file = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("output.wav")
-                            }
-                            print(file)
-                            try await self.recorder.startRecording(toOutputFile: file, delegate: self)
-                            self.isRecording = true
-                            self.recordedFile = file
-                        } catch {
-                            print(error.localizedDescription)
-                            self.isRecording = false
+    func stopAndProcessRecord() async -> String {
+        await recorder.stopRecording()
+        isRecording = false
+        var text = ""
+        if let recordedFile {
+            text = await transcribeAudio(recordedFile)
+        }
+        return text
+    }
+
+    func startRecord() async {
+        requestRecordPermission { granted in
+            if granted {
+                Task {
+                    do {
+//                        self.stopPlayback()
+                        let file: URL
+                        if #available(macOS 13.0, *) {
+                            file = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appending(path: "output.wav")
+                        } else {
+                            // Fallback on earlier versions
+                            file = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("output.wav")
                         }
+                        print(file)
+                        try await self.recorder.startRecording(toOutputFile: file, delegate: self)
+                        self.isRecording = true
+                        self.recordedFile = file
+                    } catch {
+                        print(error.localizedDescription)
+                        self.isRecording = false
                     }
                 }
             }
