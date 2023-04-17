@@ -71,25 +71,24 @@ struct GrowingButton: ButtonStyle {
         }
 
         func updateNSView(_: WKWebView, context _: Context) {}
-        
+
         func doAnimation() {
             webView.evaluateJavaScript("""
-                                       if (document.querySelector('.loader').classList.contains('active')) {
-                                             document.querySelectorAll('.line').forEach(el => {el.classList.remove('stroke'); el.classList.add('small')})
-                                           setTimeout(()=>{
-                                       var el = document.querySelector('.loader').classList
-                                       el.remove('active')
-                                       el.add('inactive')
-                                       },500)
-                                            } else {
-                                             document.querySelectorAll('.line').forEach(el => {el.classList.remove('small'); el.classList.add('stroke')})
-                                             var el = document.querySelector('.loader').classList
-                                            el.remove('inactive')
-                                            el.add('active')
-                                            }
-                                       """) { (result, error) in
-                if error == nil {
-                }
+            if (document.querySelector('.loader').classList.contains('active')) {
+                  document.querySelectorAll('.line').forEach(el => {el.classList.remove('stroke'); el.classList.add('small')})
+                setTimeout(()=>{
+            var el = document.querySelector('.loader').classList
+            el.remove('active')
+            el.add('inactive')
+            },500)
+                 } else {
+                  document.querySelectorAll('.line').forEach(el => {el.classList.remove('small'); el.classList.add('stroke')})
+                  var el = document.querySelector('.loader').classList
+                 el.remove('inactive')
+                 el.add('active')
+                 }
+            """) { _, error in
+                if error == nil {}
             }
         }
     }
@@ -141,78 +140,86 @@ struct GrowingButton: ButtonStyle {
         }
 
         func updateUIView(_: WKWebView, context _: Context) {}
-        
+
         func doAnimation() {
             webView.evaluateJavaScript("""
-                                       if (document.querySelector('.loader').classList.contains('active')) {
-                                             document.querySelectorAll('.line').forEach(el => {el.classList.remove('stroke'); el.classList.add('small')})
-                                           setTimeout(()=>{
-                                       var el = document.querySelector('.loader').classList
-                                       el.remove('active')
-                                       el.add('inactive')
-                                       },500)
-                                            } else {
-                                             document.querySelectorAll('.line').forEach(el => {el.classList.remove('small'); el.classList.add('stroke')})
-                                             var el = document.querySelector('.loader').classList
-                                            el.remove('inactive')
-                                            el.add('active')
-                                            }
-                                       """) { (result, error) in
-                if error == nil {
-                }
+            if (document.querySelector('.loader').classList.contains('active')) {
+                  document.querySelectorAll('.line').forEach(el => {el.classList.remove('stroke'); el.classList.add('small')})
+                setTimeout(()=>{
+            var el = document.querySelector('.loader').classList
+            el.remove('active')
+            el.add('inactive')
+            },500)
+                 } else {
+                  document.querySelectorAll('.line').forEach(el => {el.classList.remove('small'); el.classList.add('stroke')})
+                  var el = document.querySelector('.loader').classList
+                 el.remove('inactive')
+                 el.add('active')
+                 }
+            """) { _, error in
+                if error == nil {}
             }
         }
     }
 #endif
 
 struct ContentView: View {
-    @StateObject var whisperState = WhisperState()
+    @StateObject var agent = ConversationAgent()
+    @StateObject var logger = Logger.shared
     #if os(macOS)
-    var display: NSDisplay = NSDisplay()
+        var display: NSDisplay = .init()
     #elseif os(iOS)
-    var display: UIDisplay = UIDisplay()
+        var display: UIDisplay = .init()
     #endif
     var body: some View {
         #if os(macOS)
-        let mainScreen = NSScreen.main
-        let mainScreenVisibleFrame = mainScreen?.visibleFrame
-        let minDim = min(mainScreenVisibleFrame!.height, mainScreenVisibleFrame!.width)
+            let mainScreen = NSScreen.main
+            let mainScreenVisibleFrame = mainScreen?.visibleFrame
+            let minDim = min(mainScreenVisibleFrame!.height, mainScreenVisibleFrame!.width)
         #elseif os(iOS)
-        let mainScreen = UIScreen.main
-        let mainScreenVisibleFrame = mainScreen.bounds
-        let minDim = min(mainScreenVisibleFrame.height, mainScreenVisibleFrame.width)
+            let mainScreen = UIScreen.main
+            let mainScreenVisibleFrame = mainScreen.bounds
+            let minDim = min(mainScreenVisibleFrame.height, mainScreenVisibleFrame.width)
         #endif
         GeometryReader { geo in
-            HStack {Spacer().frame(width:0.1*geo.size.width)
+            HStack { Spacer().frame(width: 0.1 * geo.size.width)
                 display
-                Spacer().frame(width:0.1*geo.size.width)
-            }.frame(width: nil, height:0.6*geo.size.height)
-                .position(x:0.5*geo.size.width,y:0.5*geo.size.height)
+                Spacer().frame(width: 0.1 * geo.size.width)
+            }.frame(width: nil, height: 0.6 * geo.size.height)
+                .position(x: 0.5 * geo.size.width, y: 0.5 * geo.size.height)
             VStack {
                 ScrollView {
-                    Text(verbatim: whisperState.messageLog)
+                    Text(verbatim: agent.lastResponse)
                         .foregroundColor(Color.white)
 
                 }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 Button(action: {
                     display.doAnimation()
-                    Task {
-                        await whisperState.toggleRecord()
+
+                    if agent.status == .ready {
+                        Task {
+                            await agent.startListening()
+                        }
+                    } else if agent.status == .listening {
+                        Task {
+                            await agent.generateResponse()
+                            agent.updateStatus(status: .ready)
+                        }
                     }
                 }) {
-                    Text(!whisperState.isRecording ? whisperState.canTranscribe ? "RECORD" : "TRANSCRIBING" : "STOP"
+                    Text(agent.displayButtonText()
                     ).animation(.easeIn(duration: 0.1))
-                        .padding(.vertical, geo.size.height*0.01)
+                        .padding(.vertical, geo.size.height * 0.01)
                         .frame(maxWidth: .infinity, alignment: .bottom)
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(GrowingButton())
-                .disabled(!whisperState.canTranscribe)
+                .disabled([.transcribing, .responding].contains(agent.status))
                 Spacer().frame(height: 20)
             }
             .padding(.horizontal, 30)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-        }.background(RadialGradient(gradient: Gradient(colors: [.blue.opacity(0.8), .black]), center: .center, startRadius: 2, endRadius: 900)).frame(minWidth:0.3*minDim, minHeight: 0.4*minDim)
+        }.background(RadialGradient(gradient: Gradient(colors: [Color(uiColor: UIColor(red: 173 / 255, green: 216 / 255, blue: 230 / 255, alpha: 1)).opacity(0.8), .blue]), center: .center, startRadius: 0, endRadius: 1000)).frame(minWidth: 0.3 * minDim, minHeight: 0.4 * minDim)
     }
 }
 
