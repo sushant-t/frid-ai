@@ -35,22 +35,22 @@ struct GrowingButton: ButtonStyle {
             webView.enclosingScrollView?.hasVerticalScroller = false
             webView.enclosingScrollView?.verticalLineScroll = 0.0
             webView.setValue(false, forKey: "drawsBackground")
-            guard let htmlUrl = Bundle.main.url(forResource: "soundwaves", withExtension: "html", subdirectory: "Data/static") else {
+            guard let htmlUrl = Bundle.main.url(forResource: "webview", withExtension: "html", subdirectory: "Data/static") else {
                 print("could not read soundwave html file")
                 return
             }
             webView.loadFileURL(htmlUrl, allowingReadAccessTo: htmlUrl)
             let request = URLRequest(url: htmlUrl)
             webView.load(request)
-            guard let cssPath = Bundle.main.url(forResource: "soundwaves", withExtension: "css", subdirectory: "Data/static") else {
-                print("could not read soundwave css file")
+            guard let cssPath = Bundle.main.url(forResource: "webview", withExtension: "css", subdirectory: "Data/static") else {
+                print("could not read webview css file")
                 return
             }
             let cssFile: String
             do {
                 cssFile = try String(contentsOf: cssPath, encoding: .utf8)
             } catch {
-                print("Could not parse soundwave css file")
+                print("Could not parse webview css file")
                 return
             }
             let plainData = cssFile.data(using: .utf8)?.base64EncodedString(options: [])
@@ -64,6 +64,20 @@ struct GrowingButton: ButtonStyle {
             """
             let cssScript = WKUserScript(source: cssStyle, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
             webView.configuration.userContentController.addUserScript(cssScript)
+
+            guard let jsPath = Bundle.main.url(forResource: "webview", withExtension: "js", subdirectory: "Data/static") else {
+                print("could not read webview js file")
+                return
+            }
+            let jsFile: String
+            do {
+                jsFile = try String(contentsOf: jsPath, encoding: .utf8)
+            } catch {
+                print("Could not parse webview js file")
+                return
+            }
+            let jsScript = WKUserScript(source: jsFile, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+            webView.configuration.userContentController.addUserScript(jsScript)
         }
 
         func makeNSView(context _: Context) -> WKWebView {
@@ -72,21 +86,16 @@ struct GrowingButton: ButtonStyle {
 
         func updateNSView(_: WKWebView, context _: Context) {}
 
-        func doAnimation() {
+        func doSoundwaveAnimation() {
+            webView.evaluateJavaScript("window.soundwaveActions();") { _, error in
+                if error == nil {}
+            }
+        }
+
+        func removeLoader() {
             webView.evaluateJavaScript("""
-            if (document.querySelector('.loader').classList.contains('active')) {
-                  document.querySelectorAll('.line').forEach(el => {el.classList.remove('stroke'); el.classList.add('small')})
-                setTimeout(()=>{
-            var el = document.querySelector('.loader').classList
-            el.remove('active')
-            el.add('inactive')
-            },500)
-                 } else {
-                  document.querySelectorAll('.line').forEach(el => {el.classList.remove('small'); el.classList.add('stroke')})
-                  var el = document.querySelector('.loader').classList
-                 el.remove('inactive')
-                 el.add('active')
-                 }
+                                    window.hideLoader = true;
+                                    window.toggleTranscribeLoader(false);
             """) { _, error in
                 if error == nil {}
             }
@@ -104,22 +113,22 @@ struct GrowingButton: ButtonStyle {
             webView.isOpaque = false
             webView.backgroundColor = UIColor.clear
             webView.scrollView.backgroundColor = UIColor.clear
-            guard let htmlUrl = Bundle.main.url(forResource: "soundwaves", withExtension: "html", subdirectory: "Data/static") else {
+            guard let htmlUrl = Bundle.main.url(forResource: "webview", withExtension: "html", subdirectory: "Data/static") else {
                 print("could not read soundwave html file")
                 return
             }
             webView.loadFileURL(htmlUrl, allowingReadAccessTo: htmlUrl)
             let request = URLRequest(url: htmlUrl)
             webView.load(request)
-            guard let cssPath = Bundle.main.url(forResource: "soundwaves", withExtension: "css", subdirectory: "Data/static") else {
-                print("could not read soundwave css file")
+            guard let cssPath = Bundle.main.url(forResource: "webview", withExtension: "css", subdirectory: "Data/static") else {
+                print("could not read webview css file")
                 return
             }
             let cssFile: String
             do {
                 cssFile = try String(contentsOf: cssPath, encoding: .utf8)
             } catch {
-                print("Could not parse soundwave css file")
+                print("Could not parse webview css file")
                 return
             }
             let plainData = cssFile.data(using: .utf8)?.base64EncodedString(options: [])
@@ -133,6 +142,20 @@ struct GrowingButton: ButtonStyle {
             """
             let cssScript = WKUserScript(source: cssStyle, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
             webView.configuration.userContentController.addUserScript(cssScript)
+
+            guard let jsPath = Bundle.main.url(forResource: "webview", withExtension: "js", subdirectory: "Data/static") else {
+                print("could not read webview js file")
+                return
+            }
+            let jsFile: String
+            do {
+                jsFile = try String(contentsOf: jsPath, encoding: .utf8)
+            } catch {
+                print("Could not parse webview js file")
+                return
+            }
+            let jsScript = WKUserScript(source: jsFile, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+            webView.configuration.userContentController.addUserScript(jsScript)
         }
 
         func makeUIView(context _: Context) -> WKWebView {
@@ -141,21 +164,16 @@ struct GrowingButton: ButtonStyle {
 
         func updateUIView(_: WKWebView, context _: Context) {}
 
-        func doAnimation() {
+        func doSoundwaveAnimation() {
+            webView.evaluateJavaScript("window.soundwaveActions();") { _, error in
+                if error == nil {}
+            }
+        }
+
+        func removeLoader() {
             webView.evaluateJavaScript("""
-            if (document.querySelector('.loader').classList.contains('active')) {
-                  document.querySelectorAll('.line').forEach(el => {el.classList.remove('stroke'); el.classList.add('small')})
-                setTimeout(()=>{
-            var el = document.querySelector('.loader').classList
-            el.remove('active')
-            el.add('inactive')
-            },500)
-                 } else {
-                  document.querySelectorAll('.line').forEach(el => {el.classList.remove('small'); el.classList.add('stroke')})
-                  var el = document.querySelector('.loader').classList
-                 el.remove('inactive')
-                 el.add('active')
-                 }
+                                    window.hideLoader = true;
+                                    window.toggleTranscribeLoader(false);
             """) { _, error in
                 if error == nil {}
             }
@@ -194,7 +212,7 @@ struct ContentView: View {
 
                 }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 Button(action: {
-                    display.doAnimation()
+                    display.doSoundwaveAnimation()
 
                     if agent.status == .ready {
                         Task {
@@ -203,6 +221,7 @@ struct ContentView: View {
                     } else if agent.status == .listening {
                         Task {
                             await agent.generateResponse(stream: true)
+                            display.removeLoader()
                             agent.updateStatus(status: .ready)
                         }
                     }
@@ -219,7 +238,12 @@ struct ContentView: View {
             }
             .padding(.horizontal, 30)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-        }.background(RadialGradient(gradient: Gradient(colors: [Color(uiColor: UIColor(red: 173 / 255, green: 216 / 255, blue: 230 / 255, alpha: 1)).opacity(0.8), .blue]), center: .center, startRadius: 0, endRadius: 1000)).frame(minWidth: 0.3 * minDim, minHeight: 0.4 * minDim)
+        }
+        #if os(iOS)
+        .background(RadialGradient(gradient: Gradient(colors: [Color(uiColor: UIColor(red: 173 / 255, green: 216 / 255, blue: 230 / 255, alpha: 1)).opacity(0.8), .blue]), center: .center, startRadius: 0, endRadius: 1000)).frame(minWidth: 0.3 * minDim, minHeight: 0.4 * minDim)
+        #elseif os(macOS)
+        .background(RadialGradient(gradient: Gradient(colors: [Color(nsColor: NSColor(red: 173 / 255, green: 216 / 255, blue: 230 / 255, alpha: 1)).opacity(0.8), .blue]), center: .center, startRadius: 0, endRadius: 1000)).frame(minWidth: 0.3 * minDim, minHeight: 0.4 * minDim)
+        #endif
     }
 }
 

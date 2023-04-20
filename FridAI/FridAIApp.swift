@@ -11,7 +11,7 @@ import SwiftUI
 struct frid_aiApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashView()
         }
     }
 }

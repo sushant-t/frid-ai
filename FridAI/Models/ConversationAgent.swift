@@ -70,18 +70,18 @@ class ConversationAgent: NSObject, ObservableObject {
                 var mesg = streamingMessage.content.trimmingCharacters(in: .whitespacesAndNewlines)
                 mesg = String(mesg[seenResponse.endIndex...])
                 seenResponse += mesg
-                if mesg.contains(/[\.\?\!\,\;\:]/) {
-                    if let firstIndex = mesg.firstIndex(where: { String($0).contains(/[\.\?\!\,\;\:]/) }) {
-                        recentWord += mesg[...firstIndex]
-                        print(recentWord)
-                        currentResponse += recentWord
-                        speechSynthesis.dictate(text: recentWord)
-                        let lastChar = mesg.index(mesg.endIndex, offsetBy: -1, limitedBy: mesg.startIndex)!
-                        if let charAfter = mesg.index(firstIndex, offsetBy: 1, limitedBy: lastChar) {
-                            recentWord = String(mesg[charAfter...])
-                        } else {
-                            recentWord = ""
-                        }
+
+                if let firstIndex = mesg.firstIndex(where: { String($0).range(of: "\\!\\?\\,\\:\\;\\.\\-", options: .regularExpression, range: nil, locale: nil) != nil })
+                {
+                    recentWord += mesg[...firstIndex]
+                    print(recentWord)
+                    currentResponse += recentWord
+                    speechSynthesis.dictate(text: recentWord)
+                    let lastChar = mesg.index(mesg.endIndex, offsetBy: -1, limitedBy: mesg.startIndex)!
+                    if let charAfter = mesg.index(firstIndex, offsetBy: 1, limitedBy: lastChar) {
+                        recentWord = String(mesg[charAfter...])
+                    } else {
+                        recentWord = ""
                     }
                 } else {
                     recentWord += mesg
