@@ -53,47 +53,55 @@ class ConversationAgent: NSObject, ObservableObject {
         var response = ""
         do {
             response = try await openAIConnector.completeChat(text, lastResponses)
+            Logger.shared.addLog(msg: "\(response)\n")
+            try speechSynthesis.dictateFromAPI(text: response)
         } catch {
             print(error.localizedDescription)
         }
-        Logger.shared.addLog(msg: "\(response)\n")
-        speechSynthesis.dictate(text: response)
         return response
     }
 
     func dictateChatStream(text: String) async -> String {
         var seenResponse = ""
-        var recentWord = ""
+        var recentSentence = ""
+
         do {
             let stream = try openAIConnector.completeChatStream(text, lastResponses)
             for await streamingMessage in stream {
                 var mesg = streamingMessage.content.trimmingCharacters(in: .whitespacesAndNewlines)
                 mesg = String(mesg[seenResponse.endIndex...])
                 seenResponse += mesg
-
-                if let firstIndex = mesg.firstIndex(where: { String($0).range(of: "\\!\\?\\,\\:\\;\\.\\-", options: .regularExpression, range: nil, locale: nil) != nil })
+                if let firstIndex = mesg.firstIndex(where: { String($0).range(of: "[\\!\\?\\:\\;\\.\\—]", options: .regularExpression, range: nil, locale: nil) != nil })
                 {
-                    recentWord += mesg[...firstIndex]
-                    print(recentWord)
-                    currentResponse += recentWord
-                    speechSynthesis.dictate(text: recentWord)
+                    recentSentence += mesg[...firstIndex]
+                    print(recentSentence)
+                    currentResponse += recentSentence
+                    queueDictation(currentDictation: recentSentence)
                     let lastChar = mesg.index(mesg.endIndex, offsetBy: -1, limitedBy: mesg.startIndex)!
                     if let charAfter = mesg.index(firstIndex, offsetBy: 1, limitedBy: lastChar) {
-                        recentWord = String(mesg[charAfter...])
+                        recentSentence = String(mesg[charAfter...])
                     } else {
-                        recentWord = ""
+                        recentSentence = ""
                     }
                 } else {
-                    recentWord += mesg
+                    recentSentence += mesg
                 }
             }
-            if !recentWord.isEmpty { currentResponse += recentWord
-                speechSynthesis.dictate(text: recentWord)
+            if !recentSentence.isEmpty { currentResponse += recentSentence
+                queueDictation(currentDictation: recentSentence)
             }
         } catch {
             print(error.localizedDescription)
         }
         return seenResponse
+    }
+
+    func queueDictation(currentDictation: String) {
+        do {
+            _ = try speechSynthesis.dictateFromAPI(text: currentDictation)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
     func updateStatus(status: ConversationStatus) {
