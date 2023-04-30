@@ -58,7 +58,7 @@ class WhisperState: NSObject, AVAudioRecorderDelegate {
 
     func transcribeSample() async {
         if let sampleUrl {
-            await transcribeAudio(sampleUrl)
+            _ = await transcribeAudio(sampleUrl)
         } else {
             Logger.shared.addLog(msg: "Sample not found\n")
         }
@@ -91,8 +91,6 @@ class WhisperState: NSObject, AVAudioRecorderDelegate {
     }
 
     private func readAudioSamples(_ url: URL) throws -> [Float] {
-        stopPlayback()
-//        try startPlayback(url)
         return try decodeWavFile(url)
     }
 
@@ -111,7 +109,6 @@ class WhisperState: NSObject, AVAudioRecorderDelegate {
             if granted {
                 Task {
                     do {
-//                        self.stopPlayback()
                         let file: URL
                         if #available(macOS 13.0, *) {
                             file = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appending(path: "output.wav")
@@ -119,7 +116,6 @@ class WhisperState: NSObject, AVAudioRecorderDelegate {
                             // Fallback on earlier versions
                             file = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("output.wav")
                         }
-                        print(file)
                         try await self.recorder.startRecording(toOutputFile: file, delegate: self)
                         self.isRecording = true
                         self.recordedFile = file
